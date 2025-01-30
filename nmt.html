@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Club - SMAN 01 Cibinong </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #ffb7c5 0%, #ff69b4 100%);
+            --secondary-color: #ff69b4;
+            --sakura-pink: #ffb7c5;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #101725;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .text-muted{
+            background: linear-gradient(45deg, #ff69b4, #ffb7c5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Floating Background Elements */
+        .bg-floating-element {
+            position: fixed;
+            background: var(--glass-bg);
+            border-radius: 50%;
+            animation: float 20s infinite;
+            filter: blur(60px);
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(100px, 100px); }
+            50% { transform: translate(-50px, 150px); }
+            75% { transform: translate(-100px, -50px); }
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 183, 197, 0.9) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            background: linear-gradient(45deg, #fff 30%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
+        }
+
+        /* Section Titles */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        /* Team Cards */
+        .team-card {
+            background: rgba(32, 30, 30, 0.9);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--sakura-pink);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .team-img {
+            height: 300px;
+            object-fit: cover;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        /* Social Links */
+        .social-links {
+            position: absolute;
+            bottom: -50px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover .social-links {
+            bottom: 20px;
+        }
+
+        /* Buttons */
+        .btn-glow {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-glow:hover {
+            transform: perspective(500px) translateZ(20px);
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4);
+        }
+
+        /* Sakura Animation */
+        .sakura-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .sakura-petal {
+            position: absolute;
+            background: #ffc0cb;
+            border-radius: 50% 50% 0 50%;
+            transform: rotate(-45deg);
+            animation: sakura-fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes sakura-fall {
+            0% { transform: translateY(-100vh) rotate(-45deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(0deg); opacity: 0.3; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .team-img { height: 200px; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sakura Animation -->
+    <div class="sakura-container"></div>
+    
+    <!-- Floating Background Elements -->
+    <div class="bg-floating-element" style="width: 500px; height: 500px; top: -100px; left: -100px;"></div>
+    <div class="bg-floating-element" style="width: 400px; height: 400px; top: 50%; right: -200px;"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" data-aos="fade-down">日本人クラブ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="100">
+                        <a class="nav-link" href="#home">Beranda</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="200">
+                        <a class="nav-link" href="#structure">Struktur</a>
+                    </li>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="300">
+                        <a class="nav-link" href="#activities">Kegiatan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-content text-center">
+            <h1 class="hero-title mb-4" data-aos="zoom-in" data-aos-delay="300">
+                Japanese Club
+            </h1>
+            <p class="lead fs-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+                Menyelami Keindahan Bahasa dan Budaya Jepang
+            </p>
+            <a href="https://link-form-daftar.com" 
+               class="btn-glow"
+               data-aos="zoom-in" 
+               data-aos-delay="700"
+               target="_blank">
+               参加する 
+            </a>
+        </div>
+    </section>
+
+    <!-- Struktur Organisasi -->
+    <section class="py-5" id="structure" style="min-height: 100vh;">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Struktur Organisasi</h2>
+
+            <!-- Pembina dan Ketua -->
+            <div class="row justify-content-center g-4">
+                <div class="col-md-4" data-aos="flip-left">
+                    <div class="team-card">
+                        <img src="images/nmn.jpg" class="team-img w-100" alt="Pembina">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">Anisa Sensei</h3>
+                            <p class="text-muted">Pembina Club</p>
+                            <div class="social-links">
+                                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ketua dan wakil ketua -->
+            <div class="row justify-content-center g-4 mt-4">
+                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="team-card">
+                        <img src="images/nmn.jpg" class="team-img w-100" alt="Anggota">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">davin</h4>
+                            <p class="text-muted"> Ketua eskul </p>
+                            <div class="social-links">
+                                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="team-card">
+                        <img src="images/nmn.jpg" class="team-img w-100" alt="Anggota">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">bramastana </h4>
+                            <p class="text-muted">wakil ketua </p>
+                            <div class="social-links">
+                                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                        <!-- pengurus -->
+            <div class="row justify-content-center g-4 mt-4">
+                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="team-card">
+                        <img src="images/nmn.jpg" class="team-img w-100" alt="Anggota">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">anisa </h4>
+                            <p class="text-muted"> sekretaris </p>
+                            <div class="social-links">
+                                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="team-card">
+                        <img src="images/nmn.jpg" class="team-img w-100" alt="Anggota">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">decha </h4>
+                            <p class="text-muted">bendahara </p>
+                            <div class="social-links">
+                                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="team-card">
+                        <img src="images/nmn.jpg" class="team-img w-100" alt="Anggota">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">muhammad tirsan alfarizky </h4>
+                            <p class="text-muted">pemateri </p>
+                            <div class="social-links">
+                                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="team-card">
+                        <img src="images/nmn.jpg" class="team-img w-100" alt="Anggota">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">nail </h4>
+                            <p class="text-muted">dokumentasi </p>
+                            <div class="social-links">
+                                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kegiatan Kami -->
+    <section class="py-5" id="activities" style="min-height: 100vh;">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Kegiatan Kami</h2>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4" data-aos="zoom-in">
+                    <div class="team-card">
+                        <div class="card-body">
+                            <h3 class="card-title">📖 Belajar Bahasa</h3>
+                            <p class="text-muted">jumat </p>
+                            <p>Belajar karakter Hiragana dan Katakana</p>
+                            <p>Pemahaman tata bahasa dasar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="team-card">
+                        <div class="card-body">
+                            <h3 class="card-title">🎎 Budaya Jepang</h3>
+                            <p class="text-muted">Setiap Bulan</p>
+                            <p>Workshop kaligrafi Jepang</p>
+                            <p>masak makanan tradisional jepang </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="team-card">
+                        <div class="card-body">
+                            <h3 class="card-title">🎬 Media Jepang</h3>
+                            <p class="text-muted">Setiap Jumat</p>
+                            <p>Nonton anime bersama</p>
+                            <p>Diskusi budaya pop Jepang</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="btn-glow rounded-circle p-3 position-fixed bottom-0 end-0 m-4">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true
+        });
+
+        // Scroll to Top
+        const scrollTop = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollTop.style.opacity = window.scrollY > 300 ? '1' : '0';
+        });
+
+        scrollTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Sakura Animation
+        function createSakura() {
+            const sakura = document.createElement('div');
+            sakura.className = 'sakura-petal';
+            sakura.style.left = Math.random() * 100 + '%';
+            sakura.style.width = Math.random() * 10 + 5 + 'px';
+            sakura.style.height = sakura.style.width;
+            sakura.style.animationDuration = Math.random() * 5 + 5 + 's';
+            document.querySelector('.sakura-container').appendChild(sakura);
+            
+            setTimeout(() => sakura.remove(), 10000);
+        }
+
+        setInterval(createSakura, 300);
+    </script>
+</body>
+</html>
